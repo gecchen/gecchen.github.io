@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>linux | 陈哥的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="finalshell连接问题安装ssh服务器sudo apt install openssh-server安装ssh客户端sudo apt install openssh-client 配置ssh客户端，去掉PasswordAuthentication yes前面的#号，保存退出sudo gedit &#x2F;etc&#x2F;ssh&#x2F;ssh_config  配置ssh服务器，把PermitRootLogin pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux">
+<meta property="og:url" content="http://example.com/2022/11/23/linux/index.html">
+<meta property="og:site_name" content="陈哥的博客">
+<meta property="og:description" content="finalshell连接问题安装ssh服务器sudo apt install openssh-server安装ssh客户端sudo apt install openssh-client 配置ssh客户端，去掉PasswordAuthentication yes前面的#号，保存退出sudo gedit &#x2F;etc&#x2F;ssh&#x2F;ssh_config  配置ssh服务器，把PermitRootLogin pr">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-23T08:16:39.000Z">
+<meta property="article:modified_time" content="2023-03-30T06:41:07.274Z">
+<meta property="article:author" content="chen ge">
+<meta property="article:tag" content="计算机基础">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="陈哥的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">陈哥的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/11/23/linux/" class="article-date">
+  <time datetime="2022-11-23T08:16:39.000Z" itemprop="datePublished">2022-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="finalshell连接问题"><a href="#finalshell连接问题" class="headerlink" title="finalshell连接问题"></a>finalshell连接问题</h4><p>安装ssh服务器<br>sudo apt install openssh-server<br>安装ssh客户端<br>sudo apt install openssh-client</p>
+<p>配置ssh客户端，去掉PasswordAuthentication yes前面的#号，保存退出<br>sudo gedit /etc/ssh/ssh_config</p>
+
+<p>配置ssh服务器，把PermitRootLogin prohibit-password改成PermitRootLogin yes，保存退出。<br>sudo gedit /etc/ssh/sshd_config</p>
+
+
+<p>重启ssh服务<br>sudo /etc/init.d/ssh restart<br>安装及配置完成！</p>
+<h4 id="su鉴定故障"><a href="#su鉴定故障" class="headerlink" title="su鉴定故障"></a>su鉴定故障</h4><p>sudo passwd root</p>
+<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><p>1.卸载Docker旧版本<br>$ sudo apt-get remove docker docker-engine docker.io containerd runc<br>1.安装 Docker Engine-Community（使用 Docker 仓库进行安装）<br>设置仓库<br>sudo apt-get update<br>2.安装 apt 依赖包，用于通过 HTTPS 来获取仓库<br>sudo apt-get install <br>    apt-transport-https <br>    ca-certificates <br>    curl <br>    gnupg2 <br>    software-properties-common一步一步安装<br>3.添加 Docker 的官方 GPG 密钥<br>$ curl -fsSL <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg">https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg</a> | sudo apt-key add -<br>4.设置稳定版仓库<br>$ sudo add-apt-repository <br>   “deb [arch=amd64] <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/docker-ce/linux/debian">https://mirrors.ustc.edu.cn/docker-ce/linux/debian</a> <br>  $(lsb_release -cs) <br>  stable”<br>5.报错（没有报错的话继续步骤7）<br>Traceback (most recent call last):<br>File “/usr/bin/add-apt-repository”, line 95, in <module><br>    sp = SoftwareProperties(options=options)<br>File “/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py”, line 109, in <strong>init</strong><br>    self.reload_sourceslist()<br>File “/usr/lib/python3/dist-packages/softwareproperties/SoftwareProperties.py”, line 599, in reload_sourceslist<br>    self.distro.get_sources(self.sourceslist)<br>File “/usr/lib/python3/dist-packages/aptsources/distro.py”, line 93, in get_sources<br>    (self.id, self.codename))<br>aptsources.distro.NoDistroTemplateException: Error: could not find a distribution template for Deepin/n/a<br>6.解决方法<br>手动添加源地址：<br> sudo vim /etc/apt/sources.list<br>添加以下语句，保存并退出：<br>deb [arch=amd64] <a target="_blank" rel="noopener" href="https://download.docker.com/linux/debian">https://download.docker.com/linux/debian</a> stretch stable<br>执行以下命令：<br>sudo apt-get update<br>输出以下内容，则解决成功：<br>命中:2 <a target="_blank" rel="noopener" href="https://community-packages.deepin.com/deepin">https://community-packages.deepin.com/deepin</a> apricot InRelease<br>命中:3 <a target="_blank" rel="noopener" href="https://cdn-package-store6.deepin.com/appstore">https://cdn-package-store6.deepin.com/appstore</a> eagle InRelease<br>命中:1 <a target="_blank" rel="noopener" href="http://uos.deepin.cn/printer">http://uos.deepin.cn/printer</a> eagle InRelease<br>命中:4 <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/docker-ce/linux/debian">https://mirrors.ustc.edu.cn/docker-ce/linux/debian</a> stretch InRelease<br>正在读取软件包列表… 完成<br>7.安装 Docker Engine-Community<br>$ sudo apt-get install docker-ce docker-ce-cli containerd.io<br>8.启动Docker<br>$ systemctl start docker<br>9.显示以下内容则安装启动成功<br>Hello from Docker!<br>This message shows that your installation appears to be working correctly.<br>To generate this message, Docker took the following steps:</p>
+<ol>
+<li>The Docker client contacted the Docker daemon.</li>
+<li>The Docker daemon pulled the “hello-world” image from the Docker Hub.<br>(amd64)</li>
+<li>The Docker daemon created a new container from that image which runs the<br>executable that produces the output you are currently reading.</li>
+<li>The Docker daemon streamed that output to the Docker client, which sent it<br>to your terminal.<br>To try something more ambitious, you can run an Ubuntu container with:<br>$ docker run -it ubuntu bash<br>Share images, automate workflows, and more with a free Docker ID:<br><a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a><br>For more examples and ideas, visit:<br><a target="_blank" rel="noopener" href="https://docs.docker.com/get-started/">https://docs.docker.com/get-started/</a></li>
+</ol>
+<p>如果使用 docker 官方仓库，速度会很慢，所以更换国内加速器<br>登录阿里云账号，拷贝自己的加速器地址<br>禁止开机自启<br>默认情况下 docker 是开机自启的，如果我们想禁用开机自启，可以通过安装 chkconfig 命令来管理 Deepin 自启项：</p>
+<h1 id="安装chkconfig"><a href="#安装chkconfig" class="headerlink" title="安装chkconfig"></a>安装chkconfig</h1><p>sudo apt-get install chkconfig</p>
+<h1 id="移除自启"><a href="#移除自启" class="headerlink" title="移除自启"></a>移除自启</h1><p>sudo chkconfig –del docker</p>
+<h1 id="docker相关"><a href="#docker相关" class="headerlink" title="docker相关"></a>docker相关</h1><h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装mysql5.7</span></span><br><span class="line">docker pull mysql:5.7</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置mysql数据卷</span></span><br><span class="line">docker run -p 3306:3306 --name mysql \</span><br><span class="line">-v /mydata/mysql/log:/var/log/mysql \</span><br><span class="line">-v /mydata/mysql/mysql-files:/var/lib/mysql-files \</span><br><span class="line">-v /mydata/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf:/etc/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=1234 -d mysql:5.7</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置my.cnf</span></span><br><span class="line">vi /mydata/mysql/conf/my.cnf</span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=&#x27;SET collation_connection = utf8_unicode_ci&#x27;</span><br><span class="line">init_connect=&#x27;SET NAMES utf8&#x27;</span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启mysql</span></span><br><span class="line">docker restart mysql</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录mysql</span></span><br><span class="line">docker exec -it mysql mysql -uroot -p1234</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录不了，在my.cnf里添加skip-grant-tables（登录时跳过权限检查）</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置root远程访问</span></span><br><span class="line">grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;1234&#x27; with grant option;</span><br><span class="line">flush privileges;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入容器</span></span><br><span class="line">docker exec -it mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>出现无法登录错误，是因为mysql.user表已经损坏，之前安装的mysql版本和现版本不一致，但是挂载的目录都一样，没有重新删除目录重新挂载启动msyql。<br>解决：删除mysql镜像容器，删除挂载的mysql目录，重新启动镜像容器，问题解决。</p>
+<h4 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mydata/redis/conf</span><br><span class="line">touch /mydata/redis/conf/redis.conf</span><br><span class="line">docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data \</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</span></span><br><span class="line"><span class="language-bash">&gt; -d redis:7.0 redis-server /etc/redis/redis.conf</span></span><br></pre></td></tr></table></figure>
+<h4 id="设置容器自启"><a href="#设置容器自启" class="headerlink" title="设置容器自启"></a>设置容器自启</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@chenge-PC:/# docker update --restart=always redis</span><br><span class="line">redis</span><br><span class="line">root@chenge-PC:/# docker update --restart=always mysql</span><br><span class="line">mysql</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/23/linux/" data-id="clfuqzwgg0002a0wk6iqg3ng4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/30/rpc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          rpc
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">计算机基础</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/30/rpc/">rpc</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/23/linux/">linux</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 chen ge<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
